@@ -19,5 +19,5 @@ using Test
     
     10000
     """
-    @test AdventOfCode2022.Day01.day01(sample) == [24000, 0]
+    @test AdventOfCode2022.Day01.day01(sample) == [24000, 45000]
 end
