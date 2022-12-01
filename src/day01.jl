@@ -13,7 +13,6 @@ function day01(input::String = readInput(joinpath(@__DIR__, "..", "data", "day01
     groups = map(x -> map(y -> parse(Int, y), split(x, "\n")), groups)
     # calculate the sum of each group
     sums = map(x -> sum(x), groups)
-
     return [maximum(sums), 0]
 end
 
