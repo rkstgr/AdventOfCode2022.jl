@@ -3,7 +3,7 @@ module AdventOfCode2022
 using BenchmarkTools
 using Printf
 
-solvedDays = [1]
+solvedDays = [1, 2]
 
 # Include the source files:
 for day in solvedDays
@@ -34,7 +34,7 @@ for d in solvedDays
     @eval begin
         input_path = joinpath(@__DIR__, "..", "data", ds)
         function $dsSymbol(input::String = readInput($d))
-            return AdventOfCode2021.$modSymbol.$dsSymbol(input)
+            return AdventOfCode2022.$modSymbol.$dsSymbol(input)
         end
         export $dsSymbol
     end
@@ -48,7 +48,7 @@ function benchmark(days=solvedDays)
         fSymbol = Symbol(@sprintf("day%02d", day))
         input = readInput(joinpath(@__DIR__, "..", "data", @sprintf("day%02d.txt", day)))
         @eval begin
-            bresult = @benchmark(AdventOfCode2021.$modSymbol.$fSymbol($input))
+            bresult = @benchmark(AdventOfCode2022.$modSymbol.$fSymbol($input))
         end
         push!(results, (day, time(bresult), memory(bresult)))
     end

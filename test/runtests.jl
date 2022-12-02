@@ -21,3 +21,12 @@ using Test
     """
     @test AdventOfCode2022.Day01.day01(sample) == [24000, 45000]
 end
+
+@testset "Day 2" begin
+    sample = """
+    A Y
+    B X
+    C Z
+    """
+    @test AdventOfCode2022.Day02.day02(sample) == [15, 12]
+end
