@@ -30,3 +30,15 @@ end
     """
     @test AdventOfCode2022.Day02.day02(sample) == [15, 12]
 end
+
+@testset "Day 3" begin
+    sample = """
+    vJrwpWtwJgWrhcsFMMfFFhFp
+    jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
+    PmmdzqPrVvPwwTWBwg
+    wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
+    ttgJtRGJQctTZtZT
+    CrZsJsPPZsGzwwsLwLmpwMDw
+    """
+    @test AdventOfCode2022.Day03.day03(sample) == [157, 70]
+end
