@@ -1,4 +1,4 @@
-# AdventOfCode2022
+# Advent Of Code 2022 🎄
 
 This repo contains my solutions for Advent of Code 2022 written in Julia
 
