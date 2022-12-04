@@ -10,4 +10,4 @@ This repo contains my solutions for Advent of Code 2022 written in Julia
 | 4 | 1.062 ms | 1.41 MiB |
 
 ## Credits
-@goggle for his repo which I used as a template [AdventOfCode2021.jl](https://github.com/goggle/AdventOfCode2021.jl)
+[@google](https://github.com/goggle) for his repo which I used as a template [AdventOfCode2021.jl](https://github.com/goggle/AdventOfCode2021.jl)
