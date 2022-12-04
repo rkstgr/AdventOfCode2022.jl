@@ -30,3 +30,27 @@ end
     """
     @test AdventOfCode2022.Day02.day02(sample) == [15, 12]
 end
+
+@testset "Day 3" begin
+    sample = """
+    vJrwpWtwJgWrhcsFMMfFFhFp
+    jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
+    PmmdzqPrVvPwwTWBwg
+    wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
+    ttgJtRGJQctTZtZT
+    CrZsJsPPZsGzwwsLwLmpwMDw
+    """
+    @test AdventOfCode2022.Day03.day03(sample) == [157, 70]
+end
+
+@testset "Day 4" begin
+    sample = """
+    2-4,6-8
+    2-3,4-5
+    5-7,7-9
+    2-8,3-7
+    6-6,4-6
+    2-6,4-8
+    """
+    @test AdventOfCode2022.Day04.day04(sample) == [2, 4]
+end
