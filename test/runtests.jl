@@ -54,3 +54,19 @@ end
     """
     @test AdventOfCode2022.Day04.day04(sample) == [2, 4]
 end
+
+@testset "Day 5" begin
+
+    sample = """
+        [D]    
+    [N] [C]    
+    [Z] [M] [P]
+     1   2   3 
+
+    move 1 from 2 to 1
+    move 3 from 1 to 3
+    move 2 from 2 to 1
+    move 1 from 1 to 2
+    """
+    @test AdventOfCode2022.Day05.day05(sample) == ["CMZ", "MCD"]
+end

@@ -16,6 +16,8 @@ function day04(input::String = readInput(joinpath(@__DIR__, "..", "data", "day04
         range2 = parse(Int, b1):parse(Int, b2)
         if range1 ⊆ range2 || range2 ⊆ range1
             part1 += 1
+            part2 += 1
+            continue
         end
         if !isdisjoint(range1, range2)
             part2 += 1
