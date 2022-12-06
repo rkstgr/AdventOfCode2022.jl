@@ -70,3 +70,9 @@ end
     """
     @test AdventOfCode2022.Day05.day05(sample) == ["CMZ", "MCD"]
 end
+
+@testset "Day 6" begin
+
+    @test AdventOfCode2022.Day06.day06("mjqjpqmgbljsphdztnvjfqwrcgsmlb") == [7, 19]
+    @test AdventOfCode2022.Day06.day06("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg") == [10, 29]
+end
