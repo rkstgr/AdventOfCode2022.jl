@@ -40,15 +40,7 @@ function isVisible(x::Int, y::Int, heights::Matrix)
     return false
 end
 
-function isVisible(heights::Matrix)
-    visible = falses(size(heights))
-    for x in 1:size(heights, 1)
-        for y in 1:size(heights, 2)
-            visible[x, y] = isVisible(x, y, heights)
-        end
-    end
-    visible
-end
+isVisible(heights::Matrix) = isVisible.(1:size(heights, 1), permutedims(1:size(heights,2)), Ref(heights))
 
 function viewingDistance(x::Int, y::Int, dir::Tuple, heights::Matrix)
     dist = findfirst(s -> s >= heights[x,y], slice(x, y, dir, heights))
