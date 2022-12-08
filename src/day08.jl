@@ -20,7 +20,7 @@ function heights(input::AbstractString):: Matrix{UInt8}
     return height
 end
 
-function slice(x::Int, y::Int, dir::Direction, heights::Matrix{UInt8})
+function slice(x::Int, y::Int, dir::Direction, heights::Matrix{UInt8})::Vector{UInt8}
     if dir == UP
         return heights[x-1:-1:1, y]
     elseif dir == RIGHT
@@ -32,7 +32,7 @@ function slice(x::Int, y::Int, dir::Direction, heights::Matrix{UInt8})
     end
 end
 
-function isVisible(x::Int, y::Int, heights::Matrix{UInt8})
+function isVisible(x::Int, y::Int, heights::Matrix{UInt8})::Bool
     if x == 1 || x == size(heights, 1) || y == 1 || y == size(heights, 2)
         return true
     end
