@@ -11,6 +11,8 @@ This repo contains my solutions for Advent of Code 2022 written in Julia
 | 5 | Supply Stacks | 2.227 ms | 1.84 MiB | 30 min |
 | 6 | Tuning Trouble | 1.484 ms | 2.22 MiB | 10 min |
 | 7 | No Space Left On Device | 825.004 μs | 952.12 KiB | 60 min |
+| 8 | Treetop Tree House | 33.394 ms | 64.63 MiB | 60 min |
+
 
 ## Credits
 [@google](https://github.com/goggle) for his repo which I used as a template [AdventOfCode2021.jl](https://github.com/goggle/AdventOfCode2021.jl)

@@ -105,3 +105,14 @@ end
     """
     @test AdventOfCode2022.Day07.day07(testInput) == [95437, 24933642]
 end
+
+@testset "Day 8" begin
+    testInput = """
+    30373
+    25512
+    65332
+    33549
+    35390
+    """
+    @test AdventOfCode2022.Day08.day08(testInput) == [21, 8]
+end
