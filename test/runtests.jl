@@ -116,3 +116,17 @@ end
     """
     @test AdventOfCode2022.Day08.day08(testInput) == [21, 8]
 end
+
+@testset "Day 9" begin
+    testInput = """
+    R 4
+    U 4
+    L 3
+    D 1
+    R 4
+    D 1
+    L 5
+    R 2
+    """
+    @test AdventOfCode2022.Day09.day09(testInput) == [13, 1]
+end
