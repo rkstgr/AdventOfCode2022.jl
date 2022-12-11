@@ -14,6 +14,7 @@ This repo contains my solutions for Advent of Code 2022 written in Julia
 | 8 | Treetop Tree House | 11.191 ms | 11.06 MiB | 60 min |
 | 9 | Rope Bridge | 16.338 ms | 26.07 MiB | 60 min |
 | 10| Cathode-Ray Tube | 66.776 μs | 64.47 KiB | 15 min |
+| 11| Monkey in the Middle | 450.026 ms | 202.98 MiB | 70 min |
 
 ## Credits
 [@google](https://github.com/goggle) for his repo which I used as a template [AdventOfCode2021.jl](https://github.com/goggle/AdventOfCode2021.jl)
