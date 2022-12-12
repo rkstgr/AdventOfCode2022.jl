@@ -6,23 +6,33 @@ using SparseArrays
 
 struct Heightmap
     data::Array{Char,2}
-    start_pos::Tuple{Int,Int}
-    end_pos::Tuple{Int,Int}
+    start_index::Int
+    end_index::Int
+end
+
+function index(array::AbstractArray, row::Int, col::Int)::Int
+    return (row-1)*size(array, 2) + col
 end
 
 function Heightmap(input::AbstractString)::Heightmap
     lines = split(strip(input), "\n")
     data = Array{Char}(undef, length(lines), length(lines[1]))
+    start_index = 0
+    end_index = 0
     for (i, line) in enumerate(lines)
         for (j, c) in enumerate(line)
-            data[i,j] = c
+            if c == 'S'
+                start_index = index(data, i, j)
+                data[i,j] = 'a'
+            elseif c == 'E'
+                end_index = index(data, i, j)
+                data[i,j] = 'z'
+            else
+                data[i,j] = c
+            end
         end
     end
-    start_pos = findfirst(data .== 'S')
-    end_pos = findfirst(data .== 'E')
-    data[start_pos] = 'a'
-    data[end_pos] = 'z'
-    return Heightmap(data, start_pos, end_pos)
+    return Heightmap(data, start_index, end_index)
 end
 
 function adjacency_matrix(hm::Heightmap)
@@ -67,45 +77,16 @@ function adjacency_matrix(hm::Heightmap)
     return adj_matrix
 end
 
-function shortest_path(hm::Heightmap, adj_matrix)
-    # Get the adjacency matrix of the heightmap
-    g = SimpleDiGraph(adj_matrix)
-
-    # Get the size of the heightmap
-    _, cols = size(hm.data)
-
-    # Calculate the index of the start and end positions in the adjacency matrix
-    start_idx = (hm.start_pos[1]-1)*cols + hm.start_pos[2]
-    end_idx = (hm.end_pos[1]-1)*cols + hm.end_pos[2]
-
-    return a_star(g, start_idx, end_idx)
+function shortest_paths_to(hm::Heightmap, target_index::Int)
+    g = SimpleDiGraph(transpose(adjacency_matrix(hm)))
+    return dijkstra_shortest_paths(g, [target_index])
 end
-
-function shortest_alternative_path(hm::Heightmap, adj_matrix)
-    # Get the adjacency matrix of the heightmap
-    g = SimpleDiGraph(transpose(adj_matrix))
-
-    # Get the size of the heightmap
-    rows, cols = size(hm.data)
-
-    # Calculate the index of the start and end positions in the adjacency matrix
-    idx_fn = (row, col) -> (row-1)*cols + col
-    end_idx = idx_fn(hm.end_pos...)
-
-    starting_indices = (cart_index -> idx_fn(cart_index[1], cart_index[2])).(findall(hm.data .== 'a'))
-    paths = dijkstra_shortest_paths(g, [end_idx])
-
-    return minimum(paths.dists[starting_indices])
-end
-    
-
 
 function day12(input = readInput(12))
     heighmap = Heightmap(input)
-    adj_matrix = adjacency_matrix(heighmap)
-    path = shortest_path(heighmap, adj_matrix)
-    dist = shortest_alternative_path(heighmap, adj_matrix)
-    return [length(path), dist]
+    paths = shortest_paths_to(heighmap, heighmap.end_index)
+    alternatives_index = (x -> index(heighmap.data, x[1], x[2])).(findall(heighmap.data .== 'a'))
+    return [paths.dists[heighmap.start_index], minimum(paths.dists[alternatives_index])]
 end
 
 end # module

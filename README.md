@@ -15,7 +15,7 @@ This repo contains my solutions for Advent of Code 2022 written in Julia
 | 9 | Rope Bridge | 16.338 ms | 26.07 MiB | 60 min |
 | 10 | Cathode-Ray Tube | 66.776 μs | 64.47 KiB | 15 min |
 | 11 | Monkey in the Middle | 450.026 ms | 202.98 MiB | 70 min |
-| 12 | Hill Climbing Algorithm | 15.656 ms | 6.09 MiB | 60 min |
+| 12 | Hill Climbing Algorithm | 12.937 ms | 3.97 MiB | 60 min |
 
 ## Credits
 [@google](https://github.com/goggle) for his repo which I used as a template [AdventOfCode2021.jl](https://github.com/goggle/AdventOfCode2021.jl)
