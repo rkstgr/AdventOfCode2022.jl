@@ -315,3 +315,15 @@ Monkey 3:
 """
     @test AdventOfCode2022.Day11.day11(testInput) == [10605, 2713310158]
 end
+
+@testset "Day 12" begin
+    testInput = """
+    Sabqponm
+    abcryxxl
+    accszExk
+    acctuvwj
+    abdefghi
+    """
+
+    @test AdventOfCode2022.Day12.day12(testInput) == [31, 29]
+end
