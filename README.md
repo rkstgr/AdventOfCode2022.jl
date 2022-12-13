@@ -2,20 +2,21 @@
 
 This repo contains my solutions for Advent of Code 2022 written in Julia
 
-| Day | Name | Time | Allocated memory | Time to solve |
+| Day | Name | Time | Allocated memory | Time to solve | Topic |
 |-----|:-----|-----:|-----------------:|----:|
-| 1 | Calorie Counting | 473.901 μs | 469.45 KiB | - |
-| 2 | Rock Paper Scissors | 1.112 ms | 1.70 MiB | - |
-| 3 | Rucksack Reorganization | 1.071 ms | 1.23 MiB | - |
-| 4 | Camp Cleanup | 1.062 ms | 1.41 MiB | - |
-| 5 | Supply Stacks | 2.227 ms | 1.84 MiB | 30 min |
-| 6 | Tuning Trouble | 1.484 ms | 2.22 MiB | 10 min |
-| 7 | No Space Left On Device | 825.004 μs | 952.12 KiB | 60 min |
-| 8 | Treetop Tree House | 11.191 ms | 11.06 MiB | 60 min |
-| 9 | Rope Bridge | 16.338 ms | 26.07 MiB | 60 min |
-| 10 | Cathode-Ray Tube | 66.776 μs | 64.47 KiB | 15 min |
-| 11 | Monkey in the Middle | 450.026 ms | 202.98 MiB | 70 min |
-| 12 | Hill Climbing Algorithm | 12.937 ms | 3.97 MiB | 60 min |
+| 1 | Calorie Counting | 473.901 μs | 469.45 KiB | - | Max / Min |
+| 2 | Rock Paper Scissors | 1.112 ms | 1.70 MiB | - | Arithmetics |
+| 3 | Rucksack Reorganization | 1.071 ms | 1.23 MiB | - | Sets |
+| 4 | Camp Cleanup | 1.062 ms | 1.41 MiB | - | Union & Intersection |
+| 5 | Supply Stacks | 2.227 ms | 1.84 MiB | 30 min | Dequeue |
+| 6 | Tuning Trouble | 1.484 ms | 2.22 MiB | 10 min | Array slices |
+| 7 | No Space Left On Device | 825.004 μs | 952.12 KiB | 60 min | Tree traversal |
+| 8 | Treetop Tree House | 11.191 ms | 11.06 MiB | 60 min | Matrix / Slices |
+| 9 | Rope Bridge | 16.338 ms | 26.07 MiB | 60 min | Scan / Accumulate |
+| 10 | Cathode-Ray Tube | 66.776 μs | 64.47 KiB | 15 min | Rendering |
+| 11 | Monkey in the Middle | 450.026 ms | 202.98 MiB | 70 min | Modulo |
+| 12 | Hill Climbing Algorithm | 12.937 ms | 3.97 MiB | 60 min | Shortest Paths |
+| 13 | Distress Signal | 151.496 ms | 2.61 MiB | 60 min | Sorting |
 
 ## Credits
 [@google](https://github.com/goggle) for his repo which I used as a template [AdventOfCode2021.jl](https://github.com/goggle/AdventOfCode2021.jl)

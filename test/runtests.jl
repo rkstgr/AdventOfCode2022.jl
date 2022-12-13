@@ -327,3 +327,41 @@ end
 
     @test AdventOfCode2022.Day12.day12(testInput) == [31, 29]
 end
+
+@testset "Day 13" begin
+    @test AdventOfCode2022.Day13.lessThan([1,1,3,1,1], [1,1,5,1,1]) == true
+    @test AdventOfCode2022.Day13.lessThan([[1],[2,3,4]], [[1],4]) == true
+    @test AdventOfCode2022.Day13.lessThan([9], [[8,7,6]]) == false
+    @test AdventOfCode2022.Day13.lessThan([[4,4],4,4], [[4,4],4,4,4]) == true
+    @test AdventOfCode2022.Day13.lessThan([7,7,7,7], [7,7,7]) == false
+    @test AdventOfCode2022.Day13.lessThan([], [3]) == true
+    @test AdventOfCode2022.Day13.lessThan([[[]]], [[]]) == false
+    @test AdventOfCode2022.Day13.lessThan([1,[2,[3,[4,[5,6,7]]]],8,9], [1,[2,[3,[4,[5,6,0]]]],8,9]) == false
+        
+    test_input = """
+    [1,1,3,1,1]
+    [1,1,5,1,1]
+
+    [[1],[2,3,4]]
+    [[1],4]
+
+    [9]
+    [[8,7,6]]
+
+    [[4,4],4,4]
+    [[4,4],4,4,4]
+
+    [7,7,7,7]
+    [7,7,7]
+
+    []
+    [3]
+
+    [[[]]]
+    [[]]
+
+    [1,[2,[3,[4,[5,6,7]]]],8,9]
+    [1,[2,[3,[4,[5,6,0]]]],8,9]
+    """
+    @test AdventOfCode2022.Day13.day13(test_input) == [13, 140]
+end
