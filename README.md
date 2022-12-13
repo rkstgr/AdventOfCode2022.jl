@@ -3,7 +3,7 @@
 This repo contains my solutions for Advent of Code 2022 written in Julia
 
 | Day | Name | Time | Allocated memory | Time to solve | Topic |
-|-----|:-----|-----:|-----------------:|----:|
+|-----|:-----|-----:|-----------------:|--------------:|:------|
 | 1 | Calorie Counting | 473.901 μs | 469.45 KiB | - | Max / Min |
 | 2 | Rock Paper Scissors | 1.112 ms | 1.70 MiB | - | Arithmetics |
 | 3 | Rucksack Reorganization | 1.071 ms | 1.23 MiB | - | Sets |
