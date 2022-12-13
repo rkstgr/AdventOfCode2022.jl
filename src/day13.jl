@@ -26,7 +26,7 @@ function parse_input(input::AbstractString)
     return @chain input begin
         split(_, '\n')
         filter(x -> x != "", _)
-        map(x -> eval(Meta.parse(x)), _)
+        map(x -> eval(Meta.parse(replace(x, r"[^\[\],0-9]" => ""))), _)
     end
 end
 
