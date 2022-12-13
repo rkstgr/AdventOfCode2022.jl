@@ -23,12 +23,11 @@ end
 lessThan(left, right)::Bool = compare(left, right) == 1
 
 function parse_input(input::AbstractString)
-    parsed_data = []
-    for line in eachline(IOBuffer(input))
-        isempty(line) && continue
-        push!(parsed_data, eval(Meta.parse(line)))
+    return @chain input begin
+        split(_, '\n')
+        filter(x -> x != "", _)
+        map(x -> eval(Meta.parse(x)), _)
     end
-    return parsed_data
 end
 
 function day13(input = readInput(13))
