@@ -32,15 +32,15 @@ end
 
 function day13(input = readInput(13))
     parsed_data = parse_input(input)
-    results::Vector{Bool} = @chain Iterators.partition(parsed_data, 2) begin
+    results = @chain Iterators.partition(parsed_data, 2) begin
         map(x -> lessThan(x...), _)
     end
 
     part1 = sum(findall(results))
 
     append!(parsed_data, [[[2]], [[6]]])
-    sorted_data = sort(parsed_data, lt=lessThan)
-    part2 = prod(identity, findall(x -> x == [[2]] || x == [[6]], sorted_data))
+    sort!(parsed_data, lt=lessThan, alg=QuickSort)
+    part2 = prod(findall(x -> x == [[2]] || x == [[6]], parsed_data))
     return [part1, part2]
 end
 

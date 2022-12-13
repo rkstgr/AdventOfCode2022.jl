@@ -16,7 +16,7 @@ This repo contains my solutions for Advent of Code 2022 written in Julia
 | 10 | Cathode-Ray Tube | 66.776 μs | 64.47 KiB | 15 min | Rendering |
 | 11 | Monkey in the Middle | 450.026 ms | 202.98 MiB | 70 min | Modulo |
 | 12 | Hill Climbing Algorithm | 12.937 ms | 3.97 MiB | 60 min | Shortest Paths |
-| 13 | Distress Signal | 151.496 ms | 2.61 MiB | 60 min | Sorting |
+| 13 | Distress Signal | 144.362 ms | 2.62 MiB | 60 min | Sorting |
 
 ## Credits
 [@google](https://github.com/goggle) for his repo which I used as a template [AdventOfCode2021.jl](https://github.com/goggle/AdventOfCode2021.jl)
