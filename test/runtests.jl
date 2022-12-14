@@ -365,3 +365,11 @@ end
     """
     @test AdventOfCode2022.Day13.day13(test_input) == [13, 140]
 end
+
+@testset "Day 14" begin
+    test_input = """
+    498,4 -> 498,6 -> 496,6
+    503,4 -> 502,4 -> 502,9 -> 494,9
+    """
+    @test AdventOfCode2022.Day14.day14(test_input) == [24, 93]
+end

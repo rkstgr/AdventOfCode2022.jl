@@ -3,7 +3,7 @@ module AdventOfCode2022
 using BenchmarkTools
 using Printf
 
-solvedDays = 1:13
+solvedDays = 1:14
 
 # Include the source files:
 for day in solvedDays

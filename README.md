@@ -3,7 +3,7 @@
 This repo contains my solutions for Advent of Code 2022 written in Julia
 
 | Day | Name | Time | Alloc. memory | Solved after | Topic |
-|-----|:-----|-----:|-----------------:|--------------:|:------|
+|-----|:-----|-----:|--------------:|-------------:|:------|
 | 1 | Calorie Counting | 473.901 μs | 469.45 KiB | - | Max / Min |
 | 2 | Rock Paper Scissors | 1.112 ms | 1.70 MiB | - | Arithmetics |
 | 3 | Rucksack Reorganization | 1.071 ms | 1.23 MiB | - | Sets |
@@ -17,6 +17,7 @@ This repo contains my solutions for Advent of Code 2022 written in Julia
 | 11 | Monkey in the Middle | 450.026 ms | 202.98 MiB | 70 min | Modulo |
 | 12 | Hill Climbing Algorithm | 12.937 ms | 3.97 MiB | 60 min | Shortest Paths |
 | 13 | Distress Signal | 144.362 ms | 2.62 MiB | 60 min | Sorting |
+| 14 | Regolith Reservoir | 42.209 ms | 9.23 MiB | 120 min | Procedural generation |
 
 ## Credits
 [@google](https://github.com/goggle) for his repo which I used as a template [AdventOfCode2021.jl](https://github.com/goggle/AdventOfCode2021.jl)
