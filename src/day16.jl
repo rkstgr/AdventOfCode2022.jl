@@ -8,19 +8,6 @@ struct Valve
     connectedTo::Vector{String}
 end
 
-testinput = """
-    Valve AA has flow rate=0; tunnels lead to valves DD, II, BB
-    Valve BB has flow rate=13; tunnels lead to valves CC, AA
-    Valve CC has flow rate=2; tunnels lead to valves DD, BB
-    Valve DD has flow rate=20; tunnels lead to valves CC, AA, EE
-    Valve EE has flow rate=3; tunnels lead to valves FF, DD
-    Valve FF has flow rate=0; tunnels lead to valves EE, GG
-    Valve GG has flow rate=0; tunnels lead to valves FF, HH
-    Valve HH has flow rate=22; tunnel leads to valve GG
-    Valve II has flow rate=0; tunnels lead to valves AA, JJ
-    Valve JJ has flow rate=21; tunnel leads to valve II
-    """
-
 function parse_input(input::AbstractString)::Vector{Valve}
     valves = Valve[]
     for line in split(strip(input), '\n')
@@ -36,8 +23,6 @@ function parse_input(input::AbstractString)::Vector{Valve}
     end
     return valves
 end
-
-valves = parse_input(testinput)
 
 function floyd_warshall(valves::Vector{Valve})::Dict{String, Dict{String, Int}}
     graph = Dict{String, Dict{String, Int}}()
@@ -66,8 +51,6 @@ function floyd_warshall(valves::Vector{Valve})::Dict{String, Dict{String, Int}}
 
     return graph
 end
-
-graph = floyd_warshall(valves)
 
 function day16(input = readInput(16))
     valves = parse_input(input)
