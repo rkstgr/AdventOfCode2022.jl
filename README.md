@@ -14,11 +14,12 @@ This repo contains my solutions for Advent of Code 2022 written in Julia
 | 8 | Treetop Tree House | 11.191 ms | 11.06 MiB | 60 min | Matrix / Slices |
 | 9 | Rope Bridge | 16.338 ms | 26.07 MiB | 60 min | Scan / Accumulate |
 | 10 | Cathode-Ray Tube | 66.776 μs | 64.47 KiB | 15 min | Rendering |
-| 11 | Monkey in the Middle | 450.026 ms | 202.98 MiB | 70 min | Modulo |
-| 12 | Hill Climbing Algorithm | 12.937 ms | 3.97 MiB | 60 min | Shortest Paths |
-| 13 | Distress Signal | 144.362 ms | 2.62 MiB | 60 min | Sorting |
-| 14 | Regolith Reservoir | 42.209 ms | 9.23 MiB | 120 min | Procedural generation |
-| 15 | Beacon Exclusion Zone | 1.008 s | 662.47 MiB | 120 min | Range Arithmetic |
+| 11 | Monkey in the Middle | 450.026 ms | 202.98 MiB | 1 h | Modulo |
+| 12 | Hill Climbing Algorithm | 12.937 ms | 3.97 MiB | 1 h | Shortest Paths |
+| 13 | Distress Signal | 144.362 ms | 2.62 MiB | 1 h | Sorting |
+| 14 | Regolith Reservoir | 42.209 ms | 9.23 MiB | 2 h | Procedural generation |
+| 15 | Beacon Exclusion Zone | 1.008 s | 662.47 MiB | 2 h | Range Arithmetic |
+| 16 | Proboscidea Volcanium | 678.453 ms | 112.73 MiB | 3 h | DFS |
 
 ## Credits
 [@google](https://github.com/goggle) for his repo which I used as a template [AdventOfCode2021.jl](https://github.com/goggle/AdventOfCode2021.jl)

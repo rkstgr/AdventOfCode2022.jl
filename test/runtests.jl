@@ -392,6 +392,21 @@ Sensor at x=14, y=3: closest beacon is at x=15, y=3
 Sensor at x=20, y=1: closest beacon is at x=15, y=3
     """
 
-    @test AdventOfCode2022.Day15.day15(test_input; target_y=10, limit=20) == [26, 56000011]
-    
+    @test AdventOfCode2022.Day15.day15(test_input; target_y=10, limit=20) == [26, 56000011] 
+end
+
+@testset "Day 16" begin
+    testinput = """
+    Valve AA has flow rate=0; tunnels lead to valves DD, II, BB
+    Valve BB has flow rate=13; tunnels lead to valves CC, AA
+    Valve CC has flow rate=2; tunnels lead to valves DD, BB
+    Valve DD has flow rate=20; tunnels lead to valves CC, AA, EE
+    Valve EE has flow rate=3; tunnels lead to valves FF, DD
+    Valve FF has flow rate=0; tunnels lead to valves EE, GG
+    Valve GG has flow rate=0; tunnels lead to valves FF, HH
+    Valve HH has flow rate=22; tunnel leads to valve GG
+    Valve II has flow rate=0; tunnels lead to valves AA, JJ
+    Valve JJ has flow rate=21; tunnel leads to valve II
+    """
+    @test AdventOfCode2022.Day16.day16(testinput) == [1651, 1707]
 end
