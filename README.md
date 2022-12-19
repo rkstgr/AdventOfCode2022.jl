@@ -16,7 +16,7 @@ This repo contains my solutions for Advent of Code 2022 written in Julia
 | 10 | Cathode-Ray Tube | 66.776 μs | 64.47 KiB | 15 min | Rendering |
 | 11 | Monkey in the Middle | 450.026 ms | 202.98 MiB | 1 h | Modulo |
 | 12 | Hill Climbing Algorithm | 12.937 ms | 3.97 MiB | 1 h | Shortest Paths |
-| 13 | Distress Signal | 144.362 ms | 2.62 MiB | 1 h | Sorting |
+| 13 | Distress Signal | 144.362 ms | 2.62 MiB | 1 h | Nested Sorting |
 | 14 | Regolith Reservoir | 42.209 ms | 9.23 MiB | 2 h | Procedural generation |
 | 15 | Beacon Exclusion Zone | 1.008 s | 662.47 MiB | 2 h | Range Arithmetic |
 | 16 | Proboscidea Volcanium | 678.453 ms | 112.73 MiB | 3 h | DFS & Bit indexing |
