@@ -21,7 +21,7 @@ This repo contains my solutions for Advent of Code 2022 written in Julia
 | 15 | Beacon Exclusion Zone | 1.008 s | 662.47 MiB | 2 h | Range Arithmetic |
 | 16 | Proboscidea Volcanium | 678.453 ms | 112.73 MiB | 3 h | DFS & Bit indexing |
 | 17 | Pyroclastic Flow | 292.661 ms | 103.33 MiB | 3 h | Collisions & Periodicity |
-| 18 | Boiling Boulders | 634.536 ms | 27.11 MiB | 1 h | BFS |
+| 18 | Boiling Boulders | 18.250 ms | 29.67 MiB | 1 h | Surface computation |
 
 ## Credits
 [@google](https://github.com/goggle) for his repo which I used as a template [AdventOfCode2021.jl](https://github.com/goggle/AdventOfCode2021.jl)
