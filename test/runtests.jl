@@ -442,3 +442,16 @@ end
     """
     @test AdventOfCode2022.Day19.day19(testinput) == [33, 56*62]
 end
+
+@testset "Day 20" begin
+    testinput = """
+    1
+    2
+    -3
+    3
+    -2
+    0
+    4
+    """
+    @test AdventOfCode2022.Day20.day20(testinput) == [3, 0]
+end
