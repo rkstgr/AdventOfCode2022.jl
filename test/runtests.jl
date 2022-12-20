@@ -133,185 +133,185 @@ end
 
 @testset "Day 10" begin
     testInput = """
-addx 15
-addx -11
-addx 6
-addx -3
-addx 5
-addx -1
-addx -8
-addx 13
-addx 4
-noop
-addx -1
-addx 5
-addx -1
-addx 5
-addx -1
-addx 5
-addx -1
-addx 5
-addx -1
-addx -35
-addx 1
-addx 24
-addx -19
-addx 1
-addx 16
-addx -11
-noop
-noop
-addx 21
-addx -15
-noop
-noop
-addx -3
-addx 9
-addx 1
-addx -3
-addx 8
-addx 1
-addx 5
-noop
-noop
-noop
-noop
-noop
-addx -36
-noop
-addx 1
-addx 7
-noop
-noop
-noop
-addx 2
-addx 6
-noop
-noop
-noop
-noop
-noop
-addx 1
-noop
-noop
-addx 7
-addx 1
-noop
-addx -13
-addx 13
-addx 7
-noop
-addx 1
-addx -33
-noop
-noop
-noop
-addx 2
-noop
-noop
-noop
-addx 8
-noop
-addx -1
-addx 2
-addx 1
-noop
-addx 17
-addx -9
-addx 1
-addx 1
-addx -3
-addx 11
-noop
-noop
-addx 1
-noop
-addx 1
-noop
-noop
-addx -13
-addx -19
-addx 1
-addx 3
-addx 26
-addx -30
-addx 12
-addx -1
-addx 3
-addx 1
-noop
-noop
-noop
-addx -9
-addx 18
-addx 1
-addx 2
-noop
-noop
-addx 9
-noop
-noop
-noop
-addx -1
-addx 2
-addx -37
-addx 1
-addx 3
-noop
-addx 15
-addx -21
-addx 22
-addx -6
-addx 1
-noop
-addx 2
-addx 1
-noop
-addx -10
-noop
-noop
-addx 20
-addx 1
-addx 2
-addx 2
-addx -6
-addx -11
-noop
-noop
-noop
+    addx 15
+    addx -11
+    addx 6
+    addx -3
+    addx 5
+    addx -1
+    addx -8
+    addx 13
+    addx 4
+    noop
+    addx -1
+    addx 5
+    addx -1
+    addx 5
+    addx -1
+    addx 5
+    addx -1
+    addx 5
+    addx -1
+    addx -35
+    addx 1
+    addx 24
+    addx -19
+    addx 1
+    addx 16
+    addx -11
+    noop
+    noop
+    addx 21
+    addx -15
+    noop
+    noop
+    addx -3
+    addx 9
+    addx 1
+    addx -3
+    addx 8
+    addx 1
+    addx 5
+    noop
+    noop
+    noop
+    noop
+    noop
+    addx -36
+    noop
+    addx 1
+    addx 7
+    noop
+    noop
+    noop
+    addx 2
+    addx 6
+    noop
+    noop
+    noop
+    noop
+    noop
+    addx 1
+    noop
+    noop
+    addx 7
+    addx 1
+    noop
+    addx -13
+    addx 13
+    addx 7
+    noop
+    addx 1
+    addx -33
+    noop
+    noop
+    noop
+    addx 2
+    noop
+    noop
+    noop
+    addx 8
+    noop
+    addx -1
+    addx 2
+    addx 1
+    noop
+    addx 17
+    addx -9
+    addx 1
+    addx 1
+    addx -3
+    addx 11
+    noop
+    noop
+    addx 1
+    noop
+    addx 1
+    noop
+    noop
+    addx -13
+    addx -19
+    addx 1
+    addx 3
+    addx 26
+    addx -30
+    addx 12
+    addx -1
+    addx 3
+    addx 1
+    noop
+    noop
+    noop
+    addx -9
+    addx 18
+    addx 1
+    addx 2
+    noop
+    noop
+    addx 9
+    noop
+    noop
+    noop
+    addx -1
+    addx 2
+    addx -37
+    addx 1
+    addx 3
+    noop
+    addx 15
+    addx -21
+    addx 22
+    addx -6
+    addx 1
+    noop
+    addx 2
+    addx 1
+    noop
+    addx -10
+    noop
+    noop
+    addx 20
+    addx 1
+    addx 2
+    addx 2
+    addx -6
+    addx -11
+    noop
+    noop
+    noop
     """
     @test AdventOfCode2022.Day10.day10(testInput) == [13140, 0]
 end
 
 @testset "Day 11" begin
     testInput = """
-Monkey 0:
-  Starting items: 79, 98
-  Operation: new = old * 19
-  Test: divisible by 23
-    If true: throw to monkey 2
-    If false: throw to monkey 3
+    Monkey 0:
+    Starting items: 79, 98
+    Operation: new = old * 19
+    Test: divisible by 23
+        If true: throw to monkey 2
+        If false: throw to monkey 3
 
-Monkey 1:
-  Starting items: 54, 65, 75, 74
-  Operation: new = old + 6
-  Test: divisible by 19
-    If true: throw to monkey 2
-    If false: throw to monkey 0
+    Monkey 1:
+    Starting items: 54, 65, 75, 74
+    Operation: new = old + 6
+    Test: divisible by 19
+        If true: throw to monkey 2
+        If false: throw to monkey 0
 
-Monkey 2:
-  Starting items: 79, 60, 97
-  Operation: new = old * old
-  Test: divisible by 13
-    If true: throw to monkey 1
-    If false: throw to monkey 3
+    Monkey 2:
+    Starting items: 79, 60, 97
+    Operation: new = old * old
+    Test: divisible by 13
+        If true: throw to monkey 1
+        If false: throw to monkey 3
 
-Monkey 3:
-  Starting items: 74
-  Operation: new = old + 3
-  Test: divisible by 17
-    If true: throw to monkey 0
-    If false: throw to monkey 1
+    Monkey 3:
+    Starting items: 74
+    Operation: new = old + 3
+    Test: divisible by 17
+        If true: throw to monkey 0
+        If false: throw to monkey 1
 """
     @test AdventOfCode2022.Day11.day11(testInput) == [10605, 2713310158]
 end
@@ -376,20 +376,20 @@ end
 
 @testset "Day 15" begin
     test_input = """
-Sensor at x=2, y=18: closest beacon is at x=-2, y=15
-Sensor at x=9, y=16: closest beacon is at x=10, y=16
-Sensor at x=13, y=2: closest beacon is at x=15, y=3
-Sensor at x=12, y=14: closest beacon is at x=10, y=16
-Sensor at x=10, y=20: closest beacon is at x=10, y=16
-Sensor at x=14, y=17: closest beacon is at x=10, y=16
-Sensor at x=8, y=7: closest beacon is at x=2, y=10
-Sensor at x=2, y=0: closest beacon is at x=2, y=10
-Sensor at x=0, y=11: closest beacon is at x=2, y=10
-Sensor at x=20, y=14: closest beacon is at x=25, y=17
-Sensor at x=17, y=20: closest beacon is at x=21, y=22
-Sensor at x=16, y=7: closest beacon is at x=15, y=3
-Sensor at x=14, y=3: closest beacon is at x=15, y=3
-Sensor at x=20, y=1: closest beacon is at x=15, y=3
+    Sensor at x=2, y=18: closest beacon is at x=-2, y=15
+    Sensor at x=9, y=16: closest beacon is at x=10, y=16
+    Sensor at x=13, y=2: closest beacon is at x=15, y=3
+    Sensor at x=12, y=14: closest beacon is at x=10, y=16
+    Sensor at x=10, y=20: closest beacon is at x=10, y=16
+    Sensor at x=14, y=17: closest beacon is at x=10, y=16
+    Sensor at x=8, y=7: closest beacon is at x=2, y=10
+    Sensor at x=2, y=0: closest beacon is at x=2, y=10
+    Sensor at x=0, y=11: closest beacon is at x=2, y=10
+    Sensor at x=20, y=14: closest beacon is at x=25, y=17
+    Sensor at x=17, y=20: closest beacon is at x=21, y=22
+    Sensor at x=16, y=7: closest beacon is at x=15, y=3
+    Sensor at x=14, y=3: closest beacon is at x=15, y=3
+    Sensor at x=20, y=1: closest beacon is at x=15, y=3
     """
 
     @test AdventOfCode2022.Day15.day15(test_input; target_y=10, limit=20) == [26, 56000011] 
@@ -433,4 +433,12 @@ end
     2,3,5
     """
     @test AdventOfCode2022.Day18.day18(testinput) == [64, 58]
+end
+
+@testset "Day 19" begin
+    testinput = """
+    Blueprint 1: Each ore robot costs 4 ore. Each clay robot costs 2 ore. Each obsidian robot costs 3 ore and 14 clay. Each geode robot costs 2 ore and 7 obsidian.
+    Blueprint 2: Each ore robot costs 2 ore. Each clay robot costs 3 ore. Each obsidian robot costs 3 ore and 8 clay. Each geode robot costs 3 ore and 12 obsidian.
+    """
+    @test AdventOfCode2022.Day19.day19(testinput) == [33, 56*62]
 end
