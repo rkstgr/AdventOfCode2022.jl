@@ -22,7 +22,7 @@ This repo contains my solutions for Advent of Code 2022 written in Julia
 | 16 | Proboscidea Volcanium | 678.453 ms | 112.73 MiB | 3 h | DFS & Bit indexing |
 | 17 | Pyroclastic Flow | 292.661 ms | 103.33 MiB | 3 h | Collisions & Periodicity |
 | 18 | Boiling Boulders | 18.250 ms | 29.67 MiB | 1 h | Surface computation |
-| 19 | Not Enough Minerals | 11.807 s | 4.28 GiB | 2.5 h | Planning & DFS |
+| 19 | Not Enough Minerals | 740.125 ms | 323.47 MiB | 2.5 h | Planning & DFS |
 
 ## Credits
 [@google](https://github.com/goggle) for his repo which I used as a template [AdventOfCode2021.jl](https://github.com/goggle/AdventOfCode2021.jl)

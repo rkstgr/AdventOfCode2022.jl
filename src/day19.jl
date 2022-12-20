@@ -3,16 +3,16 @@ module Day19
 using AdventOfCode2022
 
 
-Resources = Tuple{Int8, Int8, Int8, Int8} # ore, clay, obsidian, geode
-Machines = Tuple{Int8, Int8, Int8, Int8} # ore, clay, obsidian, geode // which machines are available
+Resources = Tuple{Int, Int, Int, Int} # ore, clay, obsidian, geode
+Machines = Tuple{Int, Int, Int, Int} # ore, clay, obsidian, geode // which machines are available
 Blueprint = Tuple{Resources, Resources, Resources, Resources} # resource costs for each robot
 
 function parseline(input::AbstractString)::Blueprint
     m = match(r"Blueprint \d+: Each ore robot costs (\d+) ore. Each clay robot costs (\d+) ore. Each obsidian robot costs (\d+) ore and (\d+) clay. Each geode robot costs (\d+) ore and (\d+) obsidian.", input).captures
-    ore_robot_cost =        (parse(Int8, m[1]), 0, 0, 0)
-    clay_robot_cost =       (parse(Int8, m[2]), 0, 0, 0)
-    obsidian_robot_cost =   (parse(Int8, m[3]), parse(Int8, m[4]), 0, 0)
-    geode_robot_cost =      (parse(Int8, m[5]), 0, parse(Int8, m[6]), 0)
+    ore_robot_cost =        (parse(Int, m[1]), 0, 0, 0)
+    clay_robot_cost =       (parse(Int, m[2]), 0, 0, 0)
+    obsidian_robot_cost =   (parse(Int, m[3]), parse(Int, m[4]), 0, 0)
+    geode_robot_cost =      (parse(Int, m[5]), 0, parse(Int, m[6]), 0)
     return (ore_robot_cost, clay_robot_cost, obsidian_robot_cost, geode_robot_cost)
 end
 
@@ -32,9 +32,16 @@ function daysUntilEnoughResources(costs::Resources, r::Resources, m::Machines)::
     return Δt
 end
 
-function maximum_geodes(r::Resources, m::Machines, blueprint::Blueprint, t::Int, deadline::Int=24)::Int
-    geodes::Int = -1
+triangle(n::Int)::Int = div(n*(n+1), 2)
+
+function maximum_geodes(r::Resources, m::Machines, blueprint::Blueprint, t::Int, deadline::Int=24, bestgeodes::Int = -1)::Int
     t_left = deadline - t
+
+    if r[4] + m[4] * t_left + div(t_left*(t_left+1), 2) <= bestgeodes # uses triangle sequence
+        # if the current resources are not enough to beat the bestgeodes, dont bother
+        return bestgeodes
+    end
+
     for i in Iterators.reverse(eachindex(m)) # TODO: go reverse
         if i!=4 && m[i] >= maximum(b[i] for b in blueprint)
             # we have already as much machines of type i as we could spend per turn
@@ -56,12 +63,12 @@ function maximum_geodes(r::Resources, m::Machines, blueprint::Blueprint, t::Int,
         Δt = Δt + 1
         r_next = r .+ (m .* Δt) .- blueprint[i]
         m_next = (m[1:i-1]..., m[i] + 1, m[i+1:end]...) # add new machine
-        geodes = max(geodes, maximum_geodes(r_next, m_next, blueprint, t + Δt, deadline))
+        bestgeodes = max(bestgeodes, maximum_geodes(r_next, m_next, blueprint, t + Δt, deadline, bestgeodes))
     end
 
     # do nothing until deadline
-    geodes = max(geodes, r[4]+(m[4]*t_left))
-    return geodes
+    bestgeodes = max(bestgeodes, r[4]+(m[4]*t_left))
+    return bestgeodes
 end
 
 function day19(input = readInpu(19))
