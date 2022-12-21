@@ -453,5 +453,5 @@ end
     0
     4
     """
-    @test AdventOfCode2022.Day20.day20(testinput) == [3, 0]
-end
+    @test AdventOfCode2022.Day20.day20(testinput) == [3, 1623178306]
+end  
