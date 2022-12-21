@@ -455,3 +455,24 @@ end
     """
     @test AdventOfCode2022.Day20.day20(testinput) == [3, 1623178306]
 end  
+
+@testset "Day 21" begin
+    input = """
+    root: pppw + sjmn
+    dbpl: 5
+    cczh: sllz + lgvd
+    zczc: 2
+    ptdq: humn - dvpt
+    dvpt: 3
+    lfqf: 4
+    humn: 5
+    ljgn: 2
+    sjmn: drzm * dbpl
+    sllz: 4
+    pppw: cczh / lfqf
+    lgvd: ljgn * ptdq
+    drzm: hmdt - zczc
+    hmdt: 32
+    """
+    @test AdventOfCode2022.Day21.day21(input) == [152, 301]
+end
