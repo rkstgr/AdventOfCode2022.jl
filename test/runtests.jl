@@ -476,3 +476,23 @@ end
     """
     @test AdventOfCode2022.Day21.day21(input) == [152, 301]
 end
+
+@testset "Day 22" begin
+    testinput = """
+            ...#
+            .#..
+            #...
+            ....
+    ...#.......#
+    ........#...
+    ..#....#....
+    ..........#.
+            ...#....
+            .....#..
+            .#......
+            ......#.
+
+    10R5L5R10L4R5L5
+    """
+    @test AdventOfCode2022.Day22.day22(testinput) == [6032, 0]
+end
