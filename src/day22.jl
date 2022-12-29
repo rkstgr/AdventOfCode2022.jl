@@ -109,7 +109,9 @@ function printMap(map::Map, directions::Dict{Tuple{Int, Int}, Direction})
     end
 end
 
-function nextPosition(pos::Tuple{Int, Int}, dir::Direction, map)
+function nextStateFlat(state::State, map::Map)::State
+    pos = state.pos
+    dir = state.dir
     if !haskey(map, pos)
         throw("{pos} is not a valid position.")
     end
@@ -120,32 +122,29 @@ function nextPosition(pos::Tuple{Int, Int}, dir::Direction, map)
         Down => (pos[1] + 1, pos[2])
         Left => (pos[1], pos[2] - 1)
     end
-    if nextPos in keys(map)
-        return nextPos
-    else
-        return @match dir begin
+
+    if !haskey(map, nextPos)
+        # wrap around 
+        nextPos = @match dir begin
             Up => @chain keys(map) filter(p -> p[2] == pos[2], _) argmax(p -> p[1], _)
             Right => @chain keys(map) filter(p -> p[1] == pos[1], _) argmin(p -> p[2], _)
             Down => @chain keys(map) filter(p -> p[2] == pos[2], _) argmin(p -> p[1], _)
             Left => @chain keys(map) filter(p -> p[1] == pos[1], _) argmax(p -> p[2], _)
         end
     end
+
+    return State(nextPos, dir)
 end
 
-function move(state::State, map::Map)
-    next_pos = nextPosition(state.pos, state.dir, map)
-    if map[next_pos] == Wall
-        return state
-    end
-    return State(next_pos, state.dir)
-end
-
-function act(state::State, instruction::Union{Int, Rotation}, map::Map)::Tuple{State, Dict{Tuple{Int, Int}, Direction}}
+function act(state::State, instruction::Union{Int, Rotation}, map::Map, nextStateFn::Function)::Tuple{State, Dict{Tuple{Int, Int}, Direction}}
     directions = Dict{Tuple{Int, Int}, Direction}()
     directions[state.pos] = state.dir
     if instruction isa Int
         for _ in 1:instruction
-            state = move(state, map)
+            nextState = nextStateFn(state, map)
+            if map[nextState.pos] != Wall
+                state = nextState
+            end
             directions[state.pos] = state.dir
         end
     elseif instruction isa Rotation
@@ -193,49 +192,67 @@ final_password(state::State) = 1000*state.pos[1] + 4*state.pos[2] + value(state.
 ------ column ------------>
 |      |      |      |
 1    50 51     101 150
-       +------+------+ row = 1
-       |  g   |   e  |
+       +------+------+ 
+       |^ g>  |  e> ^| row = 1
        |f     |     d|
-       |      |  b   | row = 50
+       |      |  b>  | row = 50
        +------+------+
        |      |
        |a    b|
-       |      |
+       |v    v|
 +------+------+
-|   a  |      | row = 101
+|  a>  |      | row = 101
 |f     |     d|
-|      |   c  | row = 150
+|v     |   c>v| row = 150
 +------+------+
 |      |
 |g    c|
-|   e  | row = 200
+|v e> v| row = 200
 +------+
 =#
 
-
-function nextState(pos::Tuple{Int, Int}, dir::Direction, map)::State
+function nextStateCube(state::State, map)::State
+    pos = state.pos
+    dir = state.dir
     if !haskey(map, pos)
         throw("{pos} is not a valid position.")
     end
 
     nextPos = @match dir begin
-        Up => (pos[1], pos[2] - 1)
-        Right => (pos[1] + 1, pos[2])
-        Down => (pos[1], pos[2] + 1)
-        Left => (pos[1] - 1, pos[2])
+        Up => (pos[1] - 1, pos[2])
+        Right => (pos[1], pos[2] + 1)
+        Down => (pos[1] + 1, pos[2])
+        Left => (pos[1], pos[2] - 1)
     end
 
-    if nextPos in keys(map)
-        return State(nextPos, dir)
-    else
-        col, row = pos
-        # return @match ((col, row), dir) begin
-        #     ((c, 101), Up)                      => State((51, 50+x), Right)
-        #     ((c,   1), Up) && if x <= 100 end   => State((,150+x-50), Right)
-        #     ((,   1), Up)                      => State()
-        # end
-
+    if !haskey(map, nextPos)
+        return @match (state.pos, state.dir) begin
+            # a
+            ((101, c), Up) && if c in 1:50 end => State((50+c, 51), Right)
+            ((r,  51), Left) && if r in 51:100 end => State((101, r-50), Down)
+            # b
+            ((r, 100), Right) && if r in 51:100 end => State((50, r+50), Up)
+            ((50,  c), Down)  && if c in 101:150 end => State((c-50, 100), Left)
+            # c
+            ((r, 50), Right) && if r in 151:200 end => State((150, r-100), Up)
+            ((150, c), Down) && if c in 51:100 end => State((c+100, 50), Left)
+            # d
+            ((r, 100), Right) && if r in 101:150 end => State((50 - (r - 101), 150), Left)
+            ((r, 150), Right) && if r in 1:50 end => State((151-r, 100), Left)
+            # e
+            ((1, c), Up) && if c in 101:150 end => State((200, c-100), Up)
+            ((200, c), Down) && if c in 1:50 end => State((1, c+100), Down)
+            # f
+            ((r,  1), Left) && if r in 101:150 end => State((50 - (r - 101), 51), Right)
+            ((r, 51), Left) && if r in 1:50 end => State((151-r, 1), Right)
+            # g
+            ((r, 1), Left) && if r in 151:200 end => State((1, r-100), Down)
+            ((1, c), Up) && if c in 51:100 end => State((c+100, 1), Right)
+            _ => throw("Invalid state: $state")
+        end
     end
+
+    return State(nextPos, dir)
 end
 
 function day22(input = readInput(22))
@@ -244,14 +261,23 @@ function day22(input = readInput(22))
     directions = Dict{Tuple{Int, Int}, Direction}()
     directions[state.pos] = state.dir
     for instruction in instructions
-        state, dirs = act(state, instruction, map)
+        state, dirs = act(state, instruction, map, nextStateFlat)
         for (pos, dir) in dirs
             directions[pos] = dir
         end
     end
     # printMap(map, directions)
     part1 = final_password(state)
-    return [part1, 0]
+
+    state = initial_state(map)
+    for inst in instructions
+        state, _ = act(state, inst, map, nextStateCube)
+        # for (pos, dir) in dirs
+        #     directions[pos] = dir
+        # end
+    end
+    part2 = final_password(state)
+    return [part1, part2]
 end
 
 end # module
