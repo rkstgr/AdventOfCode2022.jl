@@ -65,23 +65,6 @@ function max_dims(map::Map)
     return (max_r, max_c)
 end
 
-function printMap(map::Map)
-    max_dim = max_dims(map)
-    for r in 1:max_dim[1]
-        for c in 1:max_dim[2]
-            if (r, c) in keys(map)
-                @match map[(r, c)] begin
-                    Wall => print('#')
-                    Open => print('.')
-                end
-            else
-                print(" ")
-            end
-        end
-        println()
-    end
-end
-
 function printMap(map::Map, directions::Dict{Tuple{Int, Int}, Direction})
     max_dim = max_dims(map)
     for r in 1:max_dim[1]
@@ -109,12 +92,71 @@ function printMap(map::Map, directions::Dict{Tuple{Int, Int}, Direction})
     end
 end
 
-function nextStateFlat(state::State, map::Map)::State
+function wrapFlat(state::State, map::Map)::State
     pos = state.pos
     dir = state.dir
-    if !haskey(map, pos)
-        throw("{pos} is not a valid position.")
+    nextPos = @match dir begin
+        Up => @chain keys(map) filter(p -> p[2] == pos[2], _) argmax(p -> p[1], _)
+        Right => @chain keys(map) filter(p -> p[1] == pos[1], _) argmin(p -> p[2], _)
+        Down => @chain keys(map) filter(p -> p[2] == pos[2], _) argmin(p -> p[1], _)
+        Left => @chain keys(map) filter(p -> p[1] == pos[1], _) argmax(p -> p[2], _)
     end
+    return State(nextPos, dir)
+end
+
+function wrapCube(state::State, map::Map)::State
+
+    #=
+    ------ column ------------>
+    |      |      |      |
+    1    50 51     101 150
+        +------+------+ 
+        |^ g>  |  e> ^| row = 1
+        |f     |     d|
+        |      |  b>  | row = 50
+        +------+------+
+        |      |
+        |a    b|
+        |v    v|
+    +------+------+
+    |  a>  |      | row = 101
+    |f     |     d|
+    |v     |   c>v| row = 150
+    +------+------+
+    |      |
+    |g    c|
+    |v e> v| row = 200
+    +------+
+    =#
+    return @match (state.pos, state.dir) begin
+            # a
+            ((101, c), Up) && if c in 1:50 end => State((50+c, 51), Right)
+            ((r,  51), Left) && if r in 51:100 end => State((101, r-50), Down)
+            # b
+            ((r, 100), Right) && if r in 51:100 end => State((50, r+50), Up)
+            ((50,  c), Down)  && if c in 101:150 end => State((c-50, 100), Left)
+            # c
+            ((r, 50), Right) && if r in 151:200 end => State((150, r-100), Up)
+            ((150, c), Down) && if c in 51:100 end => State((c+100, 50), Left)
+            # d
+            ((r, 100), Right) && if r in 101:150 end => State((50 - (r - 101), 150), Left)
+            ((r, 150), Right) && if r in 1:50 end => State((151-r, 100), Left)
+            # e
+            ((1, c), Up) && if c in 101:150 end => State((200, c-100), Up)
+            ((200, c), Down) && if c in 1:50 end => State((1, c+100), Down)
+            # f
+            ((r,  1), Left) && if r in 101:150 end => State((50 - (r - 101), 51), Right)
+            ((r, 51), Left) && if r in 1:50 end => State((151-r, 1), Right)
+            # g
+            ((r, 1), Left) && if r in 151:200 end => State((1, r-100), Down)
+            ((1, c), Up) && if c in 51:100 end => State((c+100, 1), Right)
+            _ => throw("Invalid state: $state")
+        end
+end
+
+function nextState(state::State, map::Map, wrapFn::Function)::State
+    pos = state.pos
+    dir = state.dir
 
     nextPos = @match dir begin
         Up => (pos[1] - 1, pos[2])
@@ -124,26 +166,20 @@ function nextStateFlat(state::State, map::Map)::State
     end
 
     if !haskey(map, nextPos)
-        # wrap around 
-        nextPos = @match dir begin
-            Up => @chain keys(map) filter(p -> p[2] == pos[2], _) argmax(p -> p[1], _)
-            Right => @chain keys(map) filter(p -> p[1] == pos[1], _) argmin(p -> p[2], _)
-            Down => @chain keys(map) filter(p -> p[2] == pos[2], _) argmin(p -> p[1], _)
-            Left => @chain keys(map) filter(p -> p[1] == pos[1], _) argmax(p -> p[2], _)
-        end
+        return wrapFn(state, map)
     end
 
     return State(nextPos, dir)
 end
 
-function act(state::State, instruction::Union{Int, Rotation}, map::Map, nextStateFn::Function)::Tuple{State, Dict{Tuple{Int, Int}, Direction}}
+function act(state::State, instruction::Union{Int, Rotation}, map::Map, wrapFn::Function)::Tuple{State, Dict{Tuple{Int, Int}, Direction}}
     directions = Dict{Tuple{Int, Int}, Direction}()
     directions[state.pos] = state.dir
     if instruction isa Int
         for _ in 1:instruction
-            nextState = nextStateFn(state, map)
-            if map[nextState.pos] != Wall
-                state = nextState
+            next_state = nextState(state, map, wrapFn)
+            if map[next_state.pos] != Wall
+                state = next_state
             end
             directions[state.pos] = state.dir
         end
@@ -188,95 +224,31 @@ value(dir::Direction) = @match dir begin
 end
 final_password(state::State) = 1000*state.pos[1] + 4*state.pos[2] + value(state.dir)
 
-#=
------- column ------------>
-|      |      |      |
-1    50 51     101 150
-       +------+------+ 
-       |^ g>  |  e> ^| row = 1
-       |f     |     d|
-       |      |  b>  | row = 50
-       +------+------+
-       |      |
-       |a    b|
-       |v    v|
-+------+------+
-|  a>  |      | row = 101
-|f     |     d|
-|v     |   c>v| row = 150
-+------+------+
-|      |
-|g    c|
-|v e> v| row = 200
-+------+
-=#
+function part1(input = readInput(22))
+    map, instructions = parseinput(input)
 
-function nextStateCube(state::State, map)::State
-    pos = state.pos
-    dir = state.dir
-    if !haskey(map, pos)
-        throw("{pos} is not a valid position.")
+    state = initial_state(map)
+    for instruction in instructions
+        state, _ = act(state, instruction, map, wrapFlat)
     end
-
-    nextPos = @match dir begin
-        Up => (pos[1] - 1, pos[2])
-        Right => (pos[1], pos[2] + 1)
-        Down => (pos[1] + 1, pos[2])
-        Left => (pos[1], pos[2] - 1)
-    end
-
-    if !haskey(map, nextPos)
-        return @match (state.pos, state.dir) begin
-            # a
-            ((101, c), Up) && if c in 1:50 end => State((50+c, 51), Right)
-            ((r,  51), Left) && if r in 51:100 end => State((101, r-50), Down)
-            # b
-            ((r, 100), Right) && if r in 51:100 end => State((50, r+50), Up)
-            ((50,  c), Down)  && if c in 101:150 end => State((c-50, 100), Left)
-            # c
-            ((r, 50), Right) && if r in 151:200 end => State((150, r-100), Up)
-            ((150, c), Down) && if c in 51:100 end => State((c+100, 50), Left)
-            # d
-            ((r, 100), Right) && if r in 101:150 end => State((50 - (r - 101), 150), Left)
-            ((r, 150), Right) && if r in 1:50 end => State((151-r, 100), Left)
-            # e
-            ((1, c), Up) && if c in 101:150 end => State((200, c-100), Up)
-            ((200, c), Down) && if c in 1:50 end => State((1, c+100), Down)
-            # f
-            ((r,  1), Left) && if r in 101:150 end => State((50 - (r - 101), 51), Right)
-            ((r, 51), Left) && if r in 1:50 end => State((151-r, 1), Right)
-            # g
-            ((r, 1), Left) && if r in 151:200 end => State((1, r-100), Down)
-            ((1, c), Up) && if c in 51:100 end => State((c+100, 1), Right)
-            _ => throw("Invalid state: $state")
-        end
-    end
-
-    return State(nextPos, dir)
+    return final_password(state)
 end
 
 function day22(input = readInput(22))
     map, instructions = parseinput(input)
+
     state = initial_state(map)
-    directions = Dict{Tuple{Int, Int}, Direction}()
-    directions[state.pos] = state.dir
     for instruction in instructions
-        state, dirs = act(state, instruction, map, nextStateFlat)
-        for (pos, dir) in dirs
-            directions[pos] = dir
-        end
+        state, _ = act(state, instruction, map, wrapFlat)
     end
-    # printMap(map, directions)
     part1 = final_password(state)
 
     state = initial_state(map)
     for inst in instructions
-        state, _ = act(state, inst, map, nextStateCube)
-        # for (pos, dir) in dirs
-        #     directions[pos] = dir
-        # end
+        state, _ = act(state, inst, map, wrapCube)
     end
     part2 = final_password(state)
+
     return [part1, part2]
 end
 

@@ -494,5 +494,5 @@ end
 
     10R5L5R10L4R5L5
     """
-    @test AdventOfCode2022.Day22.day22(testinput) == [6032, 0]
+    @test AdventOfCode2022.Day22.part1(testinput) == 6032
 end

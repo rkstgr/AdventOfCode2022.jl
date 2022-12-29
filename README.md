@@ -25,6 +25,7 @@ This repo contains my solutions for Advent of Code 2022 written in Julia
 | 19 | Not Enough Minerals | 740.125 ms | 323.47 MiB | 2.5 h | Planning & DFS |
 | 20 | Grove Positioning System | 619.685 ms | 1.27 MiB | 3 h | Rotating Linked List |
 | 21 | Monkey Math | 1.615 ms | 1.57 MiB | 2 h | Inverse Arithmetic |
+| 22 | Monkey Map | 115.636 ms | 21.40 MiB | 3 h | 3D Cube |
 
 ## Credits
 [@google](https://github.com/goggle) for his repo which I used as a template [AdventOfCode2021.jl](https://github.com/goggle/AdventOfCode2021.jl)
