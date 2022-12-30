@@ -26,6 +26,7 @@ This repo contains my solutions for Advent of Code 2022 written in Julia
 | 20 | Grove Positioning System | 619.685 ms | 1.27 MiB | 3 h | Rotating Linked List |
 | 21 | Monkey Math | 1.615 ms | 1.57 MiB | 2 h | Inverse Arithmetic |
 | 22 | Monkey Map | 115.636 ms | 21.40 MiB | 3 h | 3D Cube |
+| 23 | Unstable Diffusion | 1.086 s | 1.14 GiB | 2 h | Conway's Game of Life |
 
 ## Credits
 [@google](https://github.com/goggle) for his repo which I used as a template [AdventOfCode2021.jl](https://github.com/goggle/AdventOfCode2021.jl)
