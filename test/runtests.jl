@@ -524,5 +524,5 @@ end
     #<^v^^>#
     ######.#
     """
-    @test AdventOfCode2022.Day24.day24(testinput) == [18, 0]
+    @test AdventOfCode2022.Day24.day24(testinput) == [18, 54]
 end
