@@ -26,7 +26,7 @@ This repo contains my solutions for Advent of Code 2022 written in Julia
 | 20 | Grove Positioning System | 619.685 ms | 1.27 MiB | 3 h | Rotating Linked List |
 | 21 | Monkey Math | 1.615 ms | 1.57 MiB | 2 h | Inverse Arithmetic |
 | 22 | Monkey Map | 115.636 ms | 21.40 MiB | 3 h | 3D Cube |
-| 23 | Unstable Diffusion | 1.086 s | 1.14 GiB | 2 h | Conway's Game of Life |
+| 23 | Unstable Diffusion | 1.086 s | 1.14 GiB | 2 h | Game of Life |
 | 24 | Blizzard Basin | 310.282 ms | 232.62 MiB | 1.5 h | BFS |
 | 25 | Full of Hot Air | 42.368 μs | 21.21 KiB | 30 min | Base conversion |
 
