@@ -27,6 +27,7 @@ This repo contains my solutions for Advent of Code 2022 written in Julia
 | 21 | Monkey Math | 1.615 ms | 1.57 MiB | 2 h | Inverse Arithmetic |
 | 22 | Monkey Map | 115.636 ms | 21.40 MiB | 3 h | 3D Cube |
 | 23 | Unstable Diffusion | 1.086 s | 1.14 GiB | 2 h | Conway's Game of Life |
+| 24 | Blizzard Basin | 310.282 ms | 232.62 MiB | 1.5 h | BFS |
 
 ## Credits
 [@google](https://github.com/goggle) for his repo which I used as a template [AdventOfCode2021.jl](https://github.com/goggle/AdventOfCode2021.jl)
